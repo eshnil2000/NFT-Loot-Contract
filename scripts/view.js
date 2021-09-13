@@ -20,7 +20,10 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
 const web3 = createAlchemyWeb3(API_URL)
 
 const PUBLIC_KEY = process.env.PUBLIC_KEY;
+
 const PRIVATE_KEY = process.env.MY_PRIVATE_KEY;
+const MY_PRIVATE_KEY1=process.env.MY_PRIVATE_KEY1
+const MY_PUBLIC_KEY1=process.env.MY_PUBLIC_KEY1
 const contract = require("../artifacts/contracts/Token.sol/Gear.json");
 const { base64 } = require('ethers/lib/utils');
 
@@ -31,10 +34,11 @@ console.log("transaction count"+ ( nftContract.defaultBlock))
     console.log(result)
 }); */
 
-//////
 
-async function viewNFT(tokenId) {
-    
+
+async function viewNFT(tokenId,pub_key) {
+    var account_token= await nftContract.methods.balanceOf(pub_key).call();
+    console.log("balance of " +pub_key + " is "+ account_token)
     //const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); //get latest nonce
     //console.log("nonce" + nonce)
     console.log("tokenId" + tokenId)
@@ -64,9 +68,11 @@ async function viewNFT(tokenId) {
 
 
         })
+        
 
 }
-var no_of_NFTs=3
+var no_of_NFTs=4
 for (let i = 0; i < no_of_NFTs; i++) {
-    var image= viewNFT(i)
+    var image= viewNFT(i,MY_PUBLIC_KEY1)
+    //console.log(image)
 }

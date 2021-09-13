@@ -20,10 +20,12 @@ const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
 
 const PUBLIC_KEY = process.env.PUBLIC_KEY;
 const PRIVATE_KEY = process.env.MY_PRIVATE_KEY;
+const MY_PRIVATE_KEY1=process.env.MY_PRIVATE_KEY1
+const MY_PUBLIC_KEY1=process.env.MY_PUBLIC_KEY1
 //////
 
-async function mintNFT(tokenId) {
-    const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); //get latest nonce
+async function mintNFT(tokenId,priv_key,pub_key) {
+    const nonce = await web3.eth.getTransactionCount(pub_key, 'latest'); //get latest nonce
     console.log("nonce" + nonce)
     console.log("tokenId" + tokenId)
   //the transaction
@@ -34,7 +36,7 @@ async function mintNFT(tokenId) {
       'gas': 500000,
       'data': nftContract.methods.claim(tokenId).encodeABI()
     };
-    const signPromise = web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
+    const signPromise = web3.eth.accounts.signTransaction(tx, priv_key);
 
     signPromise
     .then((signedTx) => {
@@ -62,7 +64,7 @@ async function mintNFT(tokenId) {
 }
 
 
-var no_of_NFTs=3
+var no_of_NFTs=5
 var i=1
 
 var myVar = setInterval(myTimer, 5000);
@@ -72,7 +74,7 @@ function myTimer() {
     myStopFunction()
   }
   else{
-    var image= mintNFT(i)
+    var image= mintNFT(i,MY_PRIVATE_KEY1,MY_PUBLIC_KEY1)
     i=i+1
   }
 }
