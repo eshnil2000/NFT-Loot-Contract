@@ -2,7 +2,7 @@ require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
 require('dotenv').config();
 
-const { MY_PRIVATE_KEY,MY_PRIVATE_KEY1,MY_PRIVATE_KEY2 } = process.env;
+const { MY_PRIVATE_KEY,MY_PRIVATE_KEY1,MY_PRIVATE_KEY2,INFURA_KEY,RINKEBY_PRIVATE_KEY } = process.env;
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
@@ -13,6 +13,11 @@ module.exports = {
       url: `https://benchnet.dappsuni.com/`,
       accounts: [`${MY_PRIVATE_KEY}`,`${MY_PRIVATE_KEY1}`,`${MY_PRIVATE_KEY2}`],
     },
+    rinkeby: {
+      url: `https://rinkeby.infura.io/v3/`+`${INFURA_KEY}`,
+      accounts: [`${RINKEBY_PRIVATE_KEY}`],
+    },
+
   },
   solidity: {
     compilers: [
