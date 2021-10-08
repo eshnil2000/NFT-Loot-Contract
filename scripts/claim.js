@@ -56,11 +56,11 @@ async function mintNFT(tokenId,priv_key,pub_key) {
                 }
               } */
     var ipfsResponse = await ipfs.add(JSON.stringify(requestBodyObject));
-    console.log(ipfsResponse)
+    //console.log(ipfsResponse)
   
   //var uri_string= "https://ipfs.io/ipfs/"+ ipfsResponse.ipfsUrl;
   var uri_string= "https://ipfs.io/ipfs/"+ ipfsResponse.path;
-
+  console.log(uri_string)
     const nonce = await web3.eth.getTransactionCount(pub_key, 'pending'); //get latest nonce
     console.log("nonce" + nonce)
     console.log("tokenId" + tokenId)
@@ -104,7 +104,7 @@ async function mintNFT(tokenId,priv_key,pub_key) {
 }
 
 
-var no_of_NFTs=1
+var no_of_NFTs=5
 var i=0
 
 var myVar = setInterval(myTimer, 5000);

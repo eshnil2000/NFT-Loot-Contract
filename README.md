@@ -8,4 +8,7 @@ npx hardhat test --network benchnet
 npx hardhat run scripts/claim.js --network benchnet
 npx hardhat run scripts/view.js --network benchnet
 
+//jsipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["http://127.0.0.1:5002", "http://localhost:3000", "http://127.0.0.1:5001", "https://webui.ipfs.io"]'
+//jsipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "POST"]'
+//jsipfs daemon
 ```
